@@ -1,0 +1,134 @@
+---
+title: Voice Agents
+description: Guide to implementing voice-powered AI agents for interactive communication
+---
+
+## Implementing Voice Agents
+
+Vaibrix voice agents enable businesses to provide sophisticated voice-based interactions through automated phone systems, virtual assistants, and voice-enabled applications. Our technology supports natural speech recognition, text-to-speech synthesis, and intelligent conversation management to deliver seamless voice experiences.
+
+<Columns cols={3}>
+  <Card title="Speech Recognition" icon="mic" href="#speech-recog">
+    Advanced speech-to-text capabilities with support for multiple languages and accents.
+  </Card>
+  <Card title="Text-to-Speech" icon="volume-2" href="#tts">
+    High-quality voice synthesis with customizable voices and natural intonation.
+  </Card>
+  <Card title="Conversation Management" icon="message-square" href="#conversation">
+    Intelligent dialogue management that maintains context and handles complex interactions.
+  </Card>
+</Columns>
+
+<Tabs>
+  <Tab title="IVR Integration" icon="phone">
+    Integrate voice agents with your existing Interactive Voice Response systems for automated call handling.
+    
+    <CodeGroup tabs="Node.js,Python">
+      ```javascript
+const vaibrix = require('vaibrix-voice');
+const ivr = new vaibrix.IVRSystem({
+  apiKey: 'your-api-key',
+  phoneNumber: '+1234567890'
+});
+
+ivr.on('call', async (call) => {
+  const response = await call.transcribe();
+  const reply = await ivr.processQuery(response.text);
+  await call.speak(reply);
+});
+```
+      ```python
+from vaibrix_voice import IVRSystem
+
+ivr = IVRSystem(
+    api_key='your-api-key',
+    phone_number='+1234567890'
+)
+
+@ivr.on_call
+def handle_call(call):
+    response = call.transcribe()
+    reply = ivr.process_query(response.text)
+    call.speak(reply)
+```
+    </CodeGroup>
+  </Tab>
+  <Tab title="Voice Applications" icon="smartphone">
+    Build custom voice-enabled applications for mobile and web platforms.
+    
+    <Steps>
+      <Step title="Configure Voice Settings" icon="settings">
+        Set up voice preferences, language options, and audio quality parameters.
+      </Step>
+      <Step title="Implement Voice Handlers" icon="code">
+        Create event handlers for speech recognition, processing, and voice synthesis.
+      </Step>
+      <Step title="Test Voice Interactions" icon="mic-off">
+        Conduct thorough testing with various voice inputs and environmental conditions.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">Voice agents can handle complex multi-turn conversations while maintaining context across pauses and interruptions in speech.</Callout>
+
+<ExpandableGroup>
+  <Expandable title="Language Support" default-open="true">
+    Our voice agents support over 50 languages and dialects, with automatic language detection and switching capabilities.
+    
+    <Request tabs="Language Configuration" show-lines="true">
+      ```javascript
+const agent = await vaibrix.createVoiceAgent({
+  name: 'Global Support',
+  languages: ['en-US', 'es-ES', 'fr-FR'],
+  autoDetectLanguage: true,
+  fallbackLanguage: 'en-US'
+});
+```
+    </Request>
+  </Expandable>
+  <Expandable title="Custom Voice Training" default-open="false">
+    Train voice agents with domain-specific terminology and pronunciation guides to improve accuracy in specialized fields.
+  </Expandable>
+</ExpandableGroup>
+
+<Response tabs="Voice Response,Error Handling" show-lines="false">
+```json
+{
+  "agent_id": "voice_456",
+  "transcription": "I'd like to schedule an appointment",
+  "confidence": 0.95,
+  "response": "I can help you schedule that appointment. What date and time works best for you?",
+  "audio_url": "https://api.vaibrix.com/audio/response_789.mp3"
+}
+```
+```json
+{
+  "error": "Speech recognition failed",
+  "code": "VOICE_002",
+  "message": "Unable to transcribe audio due to poor quality or unsupported format."
+}
+```
+</Response>
+
+<Expandable title="Advanced Voice Features" default-open="false">
+  Leverage advanced capabilities like emotion detection, speaker identification, and real-time translation for enterprise-grade voice applications.
+  
+  <CodeGroup tabs="JavaScript">
+    ```javascript
+const advancedAgent = await vaibrix.createVoiceAgent({
+  features: {
+    emotionDetection: true,
+    speakerIdentification: true,
+    realTimeTranslation: true
+  },
+  languages: ['en', 'es', 'fr']
+});
+
+advancedAgent.on('emotion', (emotion) => {
+  console.log(`Detected emotion: ${emotion}`);
+  // Adjust response based on user emotion
+});
+```
+  </CodeGroup>
+</Expandable>

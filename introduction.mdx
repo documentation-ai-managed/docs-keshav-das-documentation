@@ -1,0 +1,89 @@
+---
+title: Introduction
+description: Overview of Vaibrix and its core capabilities for AI-powered business solutions
+---
+
+## Getting Started
+
+Vaibrix is a cutting-edge technology company that empowers businesses to revolutionize their operations through innovative AI solutions. They specialize in crafting custom chatbots, voice agents, and web development services designed to streamline processes, enhance customer engagement, and drive growth. Our platform integrates seamlessly to deliver personalized experiences that boost efficiency and customer satisfaction.
+
+<Columns cols={3}>
+  <Card title="Chatbots" icon="message-square" href="/chatbots">
+    Build intelligent conversational AI assistants that handle customer inquiries and automate support workflows.
+  </Card>
+  <Card title="Voice Agents" icon="mic" href="/voice-agents">
+    Deploy sophisticated voice-powered agents for interactive voice response systems and virtual assistants.
+  </Card>
+  <Card title="Web Development" icon="code" href="/web-development">
+    Create dynamic, responsive websites and applications with modern frameworks and AI integration.
+  </Card>
+</Columns>
+
+<Tabs>
+  <Tab title="Quick Start" icon="play">
+    Get up and running in minutes with our streamlined setup process. First, create your account and choose your solution type. Then, configure your integration settings and deploy your first AI agent.
+    
+    <Steps>
+      <Step title="Sign Up" icon="user-plus">
+        Create your Vaibrix account and select your subscription plan that fits your business needs.
+      </Step>
+      <Step title="Configure" icon="settings">
+        Set up your API keys and customize the behavior of your AI agents according to your requirements.
+      </Step>
+      <Step title="Deploy" icon="rocket">
+        Launch your chatbot, voice agent, or web application and start benefiting from AI-powered automation.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Key Features" icon="star">
+    Discover the powerful capabilities that set Vaibrix apart in the AI solutions market. Our platform offers real-time learning, multi-language support, and seamless integration with existing systems.
+    
+    <ExpandableGroup>
+      <Expandable title="Real-time Adaptation" default-open="true">
+        Our AI agents continuously learn from interactions to provide increasingly accurate and personalized responses.
+      </Expandable>
+      <Expandable title="Multi-channel Support" default-open="false">
+        Deploy across web, mobile, voice, and messaging platforms for consistent customer experiences.
+      </Expandable>
+    </ExpandableGroup>
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">For the best results, start with our documentation and API reference to understand integration options before deploying your first solution.</Callout>
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+const vaibrix = require('vaibrix-sdk');
+const client = new vaibrix.Client({ apiKey: 'your-api-key' });
+const chatbot = await client.createChatbot({
+  name: 'Support Bot',
+  personality: 'helpful'
+});
+console.log('Chatbot created:', chatbot.id);
+```
+  ```python
+from vaibrix_sdk import VaibrixClient
+client = VaibrixClient(api_key='your-api-key')
+chatbot = client.create_chatbot(
+    name='Support Bot',
+    personality='helpful'
+)
+print(f'Chatbot created: {chatbot.id}')
+```
+</CodeGroup>
+
+<Expandable title="Advanced Configuration" default-open="false">
+  For enterprise deployments, configure custom training data, webhook integrations, and advanced analytics to maximize the value of your AI solutions. Our platform supports fine-tuning models with your specific domain knowledge to achieve superior performance.
+  
+  <Steps>
+    <Step title="Prepare Data" icon="database">
+      Gather and format your training data according to our specifications for optimal model performance.
+    </Step>
+    <Step title="Train Model" icon="cpu">
+      Use our training API to fine-tune the AI model with your custom data and requirements.
+    </Step>
+    <Step title="Test & Deploy" icon="check-circle">
+      Thoroughly test the trained model in staging before deploying to production environments.
+    </Step>
+  </Steps>
+</Expandable>

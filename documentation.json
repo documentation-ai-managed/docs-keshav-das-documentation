@@ -1,0 +1,71 @@
+{
+  "name": "Vaibrix Documentation",
+  "initialRoute": "introduction",
+  "colors": {
+    "primaryColor": "#82614d"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "icon": "book",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              {
+                "title": "Introduction",
+                "path": "introduction",
+                "icon": "star"
+              }
+            ]
+          },
+          {
+            "group": "Core Features",
+            "icon": "zap",
+            "pages": [
+              {
+                "title": "Chatbots",
+                "path": "chatbots",
+                "icon": "message-square"
+              },
+              {
+                "title": "Voice Agents",
+                "path": "voice-agents",
+                "icon": "mic"
+              },
+              {
+                "title": "Web Development",
+                "path": "web-development",
+                "icon": "code"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "icon": "terminal",
+        "groups": [
+          {
+            "group": "Endpoints",
+            "icon": "settings",
+            "openapi": "openapi.yaml"
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "icon": "clock",
+        "pages": [
+          {
+            "title": "Release History",
+            "path": "changelog",
+            "icon": "history"
+          }
+        ]
+      }
+    ]
+  }
+}

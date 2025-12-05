@@ -1,0 +1,174 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Vaibrix API
+  license:
+    name: MIT
+servers:
+  - url: https://api.vaibrix.com/v1
+paths:
+  /chatbots:
+    get:
+      summary: List all chatbots
+      operationId: listChatbots
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: An paged array of chatbots
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chatbots'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new chatbot with customizable personality and integration options
+      operationId: createChatbots
+      responses:
+        201:
+          description: Chatbot creation successful with configuration details returned
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /chatbots/{chatbotId}:
+    get:
+      summary: Retrieve detailed information for a specific chatbot including configuration and performance metrics
+      operationId: showChatbotById
+      parameters:
+        - name: chatbotId
+          in: path
+          required: true
+          description: The unique identifier of the chatbot to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: Detailed chatbot information including settings and recent activity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chatbots'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /voice-agents:
+    get:
+      summary: Retrieve a list of all voice agents configured in the system
+      operationId: listVoiceAgents
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of voice agents to return in a single request
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: Paginated collection of voice agents with their current status
+          headers:
+            x-next:
+              description: Link to retrieve the next set of results
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgents'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Deploy a new voice agent with specified language and capability settings
+      operationId: createVoiceAgents
+      responses:
+        201:
+          description: Voice agent successfully created and ready for configuration
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Chatbot:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        personality:
+          type: string
+        status:
+          type: string
+          enum: [active, inactive, training]
+        created_at:
+          type: string
+          format: date-time
+    Chatbots:
+      type: array
+      items:
+        $ref: '#/components/schemas/Chatbot'
+    VoiceAgent:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        language:
+          type: string
+        status:
+          type: string
+          enum: [active, inactive, training]
+        capabilities:
+          type: array
+          items:
+            type: string
+    VoiceAgents:
+      type: array
+      items:
+        $ref: '#/components/schemas/VoiceAgent'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

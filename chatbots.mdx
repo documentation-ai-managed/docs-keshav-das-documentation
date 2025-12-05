@@ -1,0 +1,144 @@
+---
+title: Chatbots
+description: Comprehensive guide to building and deploying intelligent chatbots with Vaibrix
+---
+
+## Building Intelligent Chatbots
+
+Vaibrix chatbots provide businesses with powerful conversational AI capabilities that can handle customer inquiries, automate support workflows, and engage users across multiple channels. Our platform supports natural language processing, context awareness, and seamless integration with existing CRM and helpdesk systems.
+
+<Columns cols={2}>
+  <Card title="Natural Language Processing" icon="brain" href="#nlp">
+    Advanced NLP capabilities for understanding user intent and providing contextually relevant responses.
+  </Card>
+  <Card title="Multi-Channel Deployment" icon="share-2" href="#channels">
+    Deploy chatbots across web, mobile, social media, and messaging platforms for consistent experiences.
+  </Card>
+</Columns>
+
+<Tabs>
+  <Tab title="Web Integration" icon="globe">
+    Embed chatbots directly into your website for instant customer support and lead generation.
+    
+    <CodeGroup tabs="HTML,React">
+      ```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.vaibrix.com/chatbot.js" data-api-key="your-api-key"></script>
+</head>
+<body>
+  <div id="vaibrix-chatbot"></div>
+</body>
+</html>
+```
+      ```javascript
+import { VaibrixChatbot } from 'vaibrix-react';
+
+function App() {
+  return (
+    <div>
+      <VaibrixChatbot apiKey="your-api-key" theme="light" />
+    </div>
+  );
+}
+
+export default App;
+```
+    </CodeGroup>
+  </Tab>
+  <Tab title="API Integration" icon="code">
+    Integrate chatbots with your existing systems using our comprehensive REST API.
+    
+    <Request tabs="Create Chatbot,Send Message" show-lines="true">
+      ```javascript
+const response = await fetch('/api/chatbots', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer your-token' },
+  body: JSON.stringify({ name: 'Support Bot', personality: 'helpful' })
+});
+const chatbot = await response.json();
+```
+      ```javascript
+const messageResponse = await fetch(`/api/chatbots/${chatbot.id}/messages`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer your-token' },
+  body: JSON.stringify({ message: 'Hello, how can I help you?' })
+});
+const reply = await messageResponse.json();
+```
+    </Request>
+  </Tab>
+</Tabs>
+
+<Steps>
+  <Step title="Design Conversation Flow" icon="layout">
+    Map out user journeys and define conversation paths based on common inquiries and business processes.
+  </Step>
+  <Step title="Configure Responses" icon="message-circle">
+    Set up automated responses, fallback handlers, and escalation protocols for complex scenarios.
+  </Step>
+  <Step title="Test & Train" icon="check-circle">
+    Thoroughly test your chatbot with various user scenarios and provide training data to improve accuracy.
+  </Step>
+  <Step title="Deploy & Monitor" icon="rocket">
+    Launch your chatbot and use analytics to monitor performance and user satisfaction metrics.
+  </Step>
+</Steps>
+
+<Callout kind="info">Chatbots built with Vaibrix can handle up to 10,000 concurrent conversations while maintaining response times under 500 milliseconds.</Callout>
+
+<ExpandableGroup>
+  <Expandable title="Handling Complex Queries" default-open="true">
+    For advanced use cases, implement custom logic to handle multi-step processes like booking appointments or processing orders.
+    
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+// Custom handler for booking requests
+function handleBookingRequest(userMessage, context) {
+  const intent = analyzeIntent(userMessage);
+  if (intent === 'book_appointment') {
+    return {
+      response: 'I can help you book an appointment. What date works for you?',
+      nextStep: 'collect_date'
+    };
+  }
+  return { response: 'I\'m sorry, I didn\'t understand that request.' };
+}
+```
+      ```python
+def handle_booking_request(user_message, context):
+    intent = analyze_intent(user_message)
+    if intent == 'book_appointment':
+        return {
+            'response': 'I can help you book an appointment. What date works for you?',
+            'next_step': 'collect_date'
+        }
+    return {'response': 'I\'m sorry, I didn\'t understand that request.'}
+```
+    </CodeGroup>
+  </Expandable>
+  <Expandable title="Analytics & Insights" default-open="false">
+    Track conversation metrics, user satisfaction scores, and identify opportunities for improvement through our comprehensive analytics dashboard.
+  </Expandable>
+</ExpandableGroup>
+
+<Response tabs="Success Response,Error Response" show-lines="false">
+```json
+{
+  "id": "chatbot_123",
+  "name": "Support Bot",
+  "status": "active",
+  "created_at": "2024-01-15T10:30:00Z",
+  "personality": "helpful",
+  "channels": ["web", "messenger"]
+}
+```
+```json
+{
+  "error": "Invalid API key",
+  "code": "AUTH_001",
+  "message": "The provided API key is not valid or has expired."
+}
+```
+</Response>
